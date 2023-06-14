@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private int cost,basecost,tirecost,barcost;
     private int tirecost2, barcost2, basecost2;
     private bool tires, bars;
+    public TMP_Dropdown dropdown;
 
     void Start()
     {
@@ -57,6 +58,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Handle(int val)
+    {
+        ChangeCar(val);
+    }
+
+    public void DropdownHandler()
+    {
+        ChangeCar(dropdown.value);
+    }
+
     private void UpdateCost()
     {
         if(number ==0)
@@ -73,20 +84,23 @@ public class GameManager : MonoBehaviour
         bodyColour.color = C;
     }
 
-    public void ChangeCar()
+    public void ChangeCar(int i)
     {
-        cars[number].SetActive(false);
-        number = number+1;
-        if (number == 2)
-            number = 0;
-        cars[number].SetActive(true);
-        if(number == 0)
+        if(i != number)
         {
-            basecost = 1000;
-        }
-        else
-        {
-            basecost2 = 2000;
+            cars[number].SetActive(false);
+            number = number + 1;
+            if (number == 2)
+                number = 0;
+            cars[number].SetActive(true);
+            if (number == 0)
+            {
+                basecost = 1000;
+            }
+            else
+            {
+                basecost2 = 2000;
+            }
         }
         UpdateCost();
     }
